@@ -5,24 +5,22 @@ import { useEffect } from 'react';
 export default function ScrollReveal() {
     useEffect(() => {
         const revealElements = document.querySelectorAll('.reveal');
-        
-        const revealOnScroll = () => {
-            const windowHeight = window.innerHeight;
-            const elementVisible = 100;
-            
-            revealElements.forEach((el) => {
-                const elementTop = el.getBoundingClientRect().top;
-                if (elementTop < windowHeight - elementVisible) {
-                    el.classList.add('active');
-                }
-            });
-        };
 
-        window.addEventListener('scroll', revealOnScroll);
-        // Trigger once on load
-        setTimeout(revealOnScroll, 100);
+        const observer = new IntersectionObserver(
+            (entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('active');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            },
+            { threshold: 0.08 }
+        );
 
-        return () => window.removeEventListener('scroll', revealOnScroll);
+        revealElements.forEach((el) => observer.observe(el));
+
+        return () => observer.disconnect();
     }, []);
 
     return null;

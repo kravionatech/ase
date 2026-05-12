@@ -7,9 +7,18 @@ export default function Footer() {
             <div className="container">
                 <div className="footer-grid">
                     <div>
-                        <div className="logo" style={{ marginBottom: '1.5rem', filter: 'brightness(0) invert(1)' }}>
-                            <Image src="/assets/logo.png" alt="ASE Logo" width={50} height={50} style={{ width: 'auto', height: '50px' }} />
-                            <span style={{ color: 'white' }}>ASE</span>
+                    <div className="logo logo-svg-wrap" style={{ marginBottom: '1.5rem' }}>
+                            <Image
+                                src="/assets/logo_new.png"
+                                alt="ASE Logo"
+                                width={44}
+                                height={44}
+                                style={{ width: 'auto', height: '44px', objectFit: 'contain', filter: 'brightness(0) invert(1)' }}
+                            />
+                            <span className="logo-text-group">
+                                <span className="logo-text-main" style={{ color: 'white' }}>ASE</span>
+                                <span className="logo-text-sub" style={{ color: '#94a3b8' }}>Anand Sindhu Enterprises</span>
+                            </span>
                         </div>
                         <p>Examination support solutions for CBT operations, manpower deployment, and center audits across India.</p>
                     </div>
@@ -18,6 +27,7 @@ export default function Footer() {
                         <ul>
                             <li><Link href="/about">About Us</Link></li>
                             <li><Link href="/services">Core Services</Link></li>
+                            <li><Link href="/states">State Coverage</Link></li>
                             <li><Link href="/coverage">National Coverage</Link></li>
                             <li><Link href="/process">How It Works</Link></li>
                         </ul>

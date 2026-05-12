@@ -12,43 +12,49 @@ export default function Header() {
 
     useEffect(() => {
         const handleScroll = () => {
-            if (window.scrollY > 50) {
-                setScrolled(true);
-            } else {
-                setScrolled(false);
-            }
+            setScrolled(window.scrollY > 50);
         };
-
         window.addEventListener('scroll', handleScroll);
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
 
-    const toggleMobileMenu = () => {
-        setMobileMenuActive(!mobileMenuActive);
-    };
-
+    const toggleMobileMenu = () => setMobileMenuActive(!mobileMenuActive);
     const isActive = (path) => pathname === path ? 'active' : '';
 
     return (
         <header className={`header ${scrolled ? 'scrolled' : ''}`}>
             <div className="container nav-container">
-                <Link href="/" className="logo">
-                    <Image src="/assets/logo.png" alt="Anand Sindhu Enterprises Logo" width={50} height={50} style={{ width: 'auto', height: '50px' }} />
-                    <span>ASE</span>
+                <Link href="/" className="logo logo-svg-wrap">
+                    <Image
+                        src="/assets/logo_new.png"
+                        alt="Anand Sindhu Enterprises Logo"
+                        width={48}
+                        height={48}
+                        style={{ width: 'auto', height: '48px', objectFit: 'contain' }}
+                        priority
+                    />
+                    <span className="logo-text-group">
+                        <span className="logo-text-main">ASE</span>
+                        <span className="logo-text-sub">Anand Sindhu Enterprises</span>
+                    </span>
                 </Link>
-                <button className="mobile-menu-btn" onClick={toggleMobileMenu}>
+
+                <button className="mobile-menu-btn" onClick={toggleMobileMenu} aria-label="Toggle menu">
                     {mobileMenuActive ? '✕' : '☰'}
                 </button>
+
                 <nav className={`nav-links ${mobileMenuActive ? 'active' : ''}`}>
                     <Link href="/" className={isActive('/')}>Home</Link>
                     <Link href="/about" className={isActive('/about')}>About</Link>
                     <Link href="/services" className={isActive('/services')}>Services</Link>
+                    <Link href="/states" className={isActive('/states')}>States</Link>
                     <Link href="/coverage" className={isActive('/coverage')}>Coverage</Link>
                     <Link href="/process" className={isActive('/process')}>Process</Link>
                     <Link href="/contact" className={isActive('/contact')}>Contact</Link>
                 </nav>
-                <Link href="/contact" className="btn-primary" style={{ display: 'none', '@media(min-width: 768px)': { display: 'block' } }}>
-                    Enquire
+
+                <Link href="/contact" className="btn-primary header-cta-btn">
+                    Enquire Now
                 </Link>
             </div>
         </header>
